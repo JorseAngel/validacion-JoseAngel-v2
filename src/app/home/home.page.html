@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Blank </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <form [formGroup]="ejemploForm">
+    
+    <ion-item *ngFor="let element of arrayInputs; index as i">
+      <ion-item>
+        <ion-label floating>{{element.titulo}}:</ion-label>
+        <ion-input
+          [(ngModel)]="arrayValores[i]"
+          formControlName= {{element.formControlName}}
+        ></ion-input>
+        <ion-label>is dirty {{ejemploForm.get(element.formControlName).dirty}}</ion-label>
+        <ion-label>is valid {{ejemploForm.get(element.formControlName).valid}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label
+          *ngIf="ejemploForm.get(element.formControlName).dirty && !ejemploForm.get(element.formControlName).valid"
+        >
+          {{element.setValor(arrayValores[i])}}
+          {{getErrorMessage(element.formControlName,ejemploForm.get(element.formControlName).errors)}}
+        </ion-label>
+      </ion-item>
+    </ion-item>
+
+  </form>
+</ion-content>
